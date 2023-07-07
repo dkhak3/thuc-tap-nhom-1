@@ -17,11 +17,10 @@ class LecturerFactory extends Factory
     public function definition()
     {
         return [
-            'lecture_name' => fake()->name(),
-            'lecture_address' => "HCM",
-            'lecture_phone' => "0999999",
-            'lecture_birthday' => fake()->date(),
-
+            'lecturer_name' => fake()->name(),
+            'lecturer_address' => fake()->address(),
+            'lecturer_phone' => fake()->phoneNumber(),
+            'lecturer_birthday' => fake()->date(),
         ];
     }
 }

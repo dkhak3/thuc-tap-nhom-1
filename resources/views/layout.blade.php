@@ -8,13 +8,14 @@
     <link rel="stylesheet" href="{{ asset ('/css/style.css') }}"> 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Epilogue:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
 </head>
 <body>
+    {{-- loader --}}
+    <div class="loader"></div>
+
+    
     {{-- Header --}}
     <div class="container-fluid">
         {{-- Header --}}
@@ -56,12 +57,12 @@
                     </a>
 
                     {{-- Logout --}}
-                    <div class="menu-item" data-tab="3" aria-current="page">
+                    <a href="{{ route('index') }}" class="menu-item" data-tab="3" aria-current="page">
                         <span class="menu-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
                         </span>
                         <span class="menu-text">Logout</span>
-                    </div>
+                    </a>
                 </div>
             </div>
 
@@ -82,12 +83,40 @@
                 @yield('content')
             </div>
         </div>
-
     </div>
 
-
-
     <script src="{{ asset ('/js/main.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+    <script>
+        $(function (e) {
+        $("#select_all_ids").click(function () {
+            $(".checkbox_ids").prop("checked", $(this).prop("checked"));
+        });
+
+        $('#deleteAllSelectedRecord').click(function(e) {
+            e.preventDefault();
+            var all_ids = [];
+            $('input:checkbox[name=ids]:checked').each(function () {
+                all_ids.push($(this).val())
+            });
+
+            $.ajax({
+                url: "{{ route('deleteAll') }}",
+                type: "DELETE",
+                data: {
+                    ids:all_ids,
+                    _token:'{{ csrf_token() }}'
+                },
+                success:function(response) {
+                    $.each(all_ids, function(key, val) {
+                        $('#lecturer_ids'+val).remove();
+                    })
+                }
+            })
+        })
+    });
+</script>
 </body>
 </html>

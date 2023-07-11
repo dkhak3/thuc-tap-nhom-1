@@ -301,3 +301,140 @@ table {
         transform: rotate(1turn);
     }
 }
+
+.form-group.invalid .form-control {
+    border-color: #f33a58;
+}
+
+.form-group.invalid .form-message {
+    color: #f33a58;
+}
+
+.form-control:focus {
+    box-shadow: none !important;
+}
+
+#deleteAllSelectedRecord {
+    display: none;
+    margin-bottom: 15px;
+}
+
+.on {
+    display: block !important;
+}
+
+/* Modal */
+.modal-confirm {
+    color: #636363;
+    width: 400px;
+}
+.modal-confirm .modal-content {
+    padding: 20px;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+    font-size: 14px;
+    font-family: "Epilogue", sans-serif !important;
+}
+.modal-confirm .modal-header {
+    border-bottom: none;
+    position: relative;
+    display: block;
+}
+.modal-confirm h4 {
+    text-align: center;
+    font-size: 26px;
+    margin: 30px 0 -10px;
+}
+.modal-confirm .close {
+    position: absolute;
+    top: -5px;
+    right: -2px;
+}
+.modal-confirm .modal-body {
+    color: #999;
+}
+.modal-confirm .modal-footer {
+    border: none;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 13px;
+    padding: 10px 15px 25px;
+    justify-content: center;
+}
+.modal-confirm .modal-footer a {
+    color: #999;
+}
+.modal-confirm .icon-box {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    border-radius: 50%;
+    z-index: 9;
+    text-align: center;
+    border: 3px solid #facea8;
+}
+.modal-confirm .icon-box div {
+    color: #f8bb86;
+    font-size: 46px;
+    display: inline-block;
+}
+.modal-confirm .btn {
+    color: #fff;
+    border-radius: 4px;
+    background: #60c7c1;
+    text-decoration: none;
+    transition: all 0.4s;
+    line-height: normal;
+    min-width: 120px;
+    border: none;
+    min-height: 40px;
+    border-radius: 3px;
+    margin: 0 5px;
+    outline: none !important;
+}
+.modal-confirm .btn-info {
+    background-color: rgb(221, 51, 51);
+}
+.modal-confirm .btn-info:hover,
+.modal-confirm .btn-info:focus {
+    background-color: rgb(221, 51, 51);
+    color: #fff;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+}
+.modal-confirm .btn-danger {
+    background-color: rgb(48, 133, 214);
+}
+.modal-confirm .btn-danger:hover,
+.modal-confirm .btn-danger:focus {
+    background-color: rgb(48, 133, 214);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+}
+.trigger-btn {
+    display: inline-block;
+    margin: 100px auto;
+}
+.modal-title {
+    margin-top: 30px;
+    position: relative;
+    max-width: 100%;
+    padding: 0;
+    color: #595959;
+    font-size: 1.875em;
+    font-weight: 600;
+    text-align: center;
+}
+
+.modal-body p {
+    z-index: 1;
+    justify-content: center;
+    margin: 1em 1.6em 0.3em;
+    padding: 0;
+    overflow: auto;
+    color: inherit;
+    font-size: 1.125em;
+    font-weight: normal;
+    line-height: normal;
+    text-align: center;
+    color: #000;
+}

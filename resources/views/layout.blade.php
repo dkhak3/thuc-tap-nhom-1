@@ -86,40 +86,95 @@
     </div>
 
     <script src="{{ asset ('/js/main.js') }}"></script>
+    <script src="{{ asset ('/js/form.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
     <script>
-        $(function (e) {
-        $("#select_all_ids").click(function () {
-            $(".checkbox_ids").prop("checked", $(this).prop("checked"));
+        Validator({
+            form: '#form-1',
+            formGroupSelector: '.form-group',
+            errorSelector: '.form-message',
+            rules: [
+                Validator.isRequired('#lecturer_name'),
+                Validator.isRequired('#lecturer_address'),
+                Validator.isRequired('#lecturer_phone'),
+                Validator.isRequired('#lecturer_birthday'),
+                Validator.isName('#lecturer_name'),
+                Validator.isPhone('#lecturer_phone'),
+                Validator.isBirthday('#lecturer_birthday'),
+                Validator.maxLength('#lecturer_name', 191),
+                Validator.maxLength('#lecturer_address', 191),
+                Validator.maxLength('#lecturer_phone', 191),
+            ],
         });
+    </script>
+    <script>
+        var temp = 0;
+        $(function (e) {
+            $("#select_all_ids").click(function () {
+                $(".checkbox_ids").prop("checked", $(this).prop("checked"));
 
-        $('#deleteAllSelectedRecord').click(function(e) {
-            e.preventDefault();
-            var all_ids = [];
-            $('input:checkbox[name=ids]:checked').each(function () {
-                all_ids.push($(this).val())
+                if ($(this).prop('checked')) {
+                    $('#deleteAllSelectedRecord').css({display:'block'});
+                } else {
+                    $('#deleteAllSelectedRecord').css({display:'none'});
+                    temp = 0;
+                }
             });
 
-            $('#btnDelete').click(function(e) {
-                $.ajax({
-                    url: "{{ route('deleteAll') }}",
-                    type: "DELETE",
-                    data: {
-                        ids:all_ids,
-                        _token:'{{ csrf_token() }}'
-                    },
-                    success:function(response) {
-                        $.each(all_ids, function(key, val) {
-                            $('#lecturer_ids'+val).remove();
-                        })
+            var arr_checkbox = $('.checkbox_ids');
+            $(arr_checkbox).each(function() {
+                console.log(arr_checkbox.length);
+                $(this).on('click',function (e) {
+                if ($(this).prop('checked')) {
+                    temp++;
+                    if (temp == arr_checkbox.length) {
+                        $('#select_all_ids').prop('checked', true);
+                        $('#deleteAllSelectedRecord').css({display:'block'});
                     }
+                }
+                else{
+                    temp--;
+                    $('#select_all_ids').prop('checked', false);
+                    $('#deleteAllSelectedRecord').css({display:'none'});
+                }  
+                console.log('temp: '+temp);
+                if (temp >= 1){
+                    $('#deleteAllSelectedRecord').css({display:'block'});
+                }
+                else{
+                    $('#select_all_ids').prop('checked', false);
+                    $('#deleteAllSelectedRecord').css({display:'none'});
+                }
+                });
+            });
+
+            $('#deleteAllSelectedRecord').click(function(e) {
+                e.preventDefault();
+                var all_ids = [];
+                $('input:checkbox[name=ids]:checked').each(function () {
+                    all_ids.push($(this).val())
+                });
+
+
+                $('#btnDelete').click(function(e) {
+                    $.ajax({
+                        url: "{{ route('deleteAll') }}",
+                        type: "DELETE",
+                        data: {
+                            ids:all_ids,
+                            _token:'{{ csrf_token() }}'
+                        },
+                        success:function(response) {
+                            $.each(all_ids, function(key, val) {
+                                $('#lecturer_ids'+val).remove();
+                            })
+                        }
+                    })
                 })
             })
-
-        })
-    });
+        });
 </script>
 </body>
 </html>

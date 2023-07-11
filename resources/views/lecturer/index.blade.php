@@ -52,7 +52,7 @@
 
         @if ($lecturer->isNotEmpty())
             {{-- Delete all selected --}}
-            <a href="" class="d-block mb-2" id="deleteAllSelectedRecord">
+            <a id="deleteAllSelectedRecord" href="" >
                 <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2" class="btn-style icon-delete menu-item">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
@@ -113,20 +113,25 @@
 
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
+                    <div class="modal-dialog modal-confirm modal-dialog-centered">
+                        <div class="modal-content">
                         <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Do you want to delete?</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <div class="icon-box">
+                            <div class="material-icons">!</div>
+                            </div>
+                            <h2 class="modal-title">Are you sure?</h2>
+                        </div>
+                        <div class="modal-body">
+                            <p>You won't be able to revert this!</p>
                         </div>
                         <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                            <button type="button" class="btn btn-info" data-bs-dismiss="modal">Cancel</button>
                             <form action="{{ route('delete', $item->id) }}">
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-primary">Yes</button>
+                                <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Yes, delete it!</button>
                             </form>
                         </div>
-                    </div>
+                        </div>
                     </div>
                 </div>
                 @endforeach
@@ -136,16 +141,21 @@
 </div>
 
 <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-confirm modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Do you want to delete?</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-header">
+            <div class="icon-box">
+            <div class="material-icons">!</div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                <button type="button" class="btn btn-primary" id="btnDelete" data-bs-dismiss="modal">Yes</button>
-            </div>
+            <h2 class="modal-title">Are you sure?</h2>
+        </div>
+        <div class="modal-body">
+            <p>You won't be able to revert this!</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-danger" id="btnDelete" data-bs-dismiss="modal">Yes, delete it!</button>
+        </div>
         </div>
     </div>
 </div>

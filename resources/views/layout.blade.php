@@ -102,19 +102,22 @@
                 all_ids.push($(this).val())
             });
 
-            $.ajax({
-                url: "{{ route('deleteAll') }}",
-                type: "DELETE",
-                data: {
-                    ids:all_ids,
-                    _token:'{{ csrf_token() }}'
-                },
-                success:function(response) {
-                    $.each(all_ids, function(key, val) {
-                        $('#lecturer_ids'+val).remove();
-                    })
-                }
+            $('#btnDelete').click(function(e) {
+                $.ajax({
+                    url: "{{ route('deleteAll') }}",
+                    type: "DELETE",
+                    data: {
+                        ids:all_ids,
+                        _token:'{{ csrf_token() }}'
+                    },
+                    success:function(response) {
+                        $.each(all_ids, function(key, val) {
+                            $('#lecturer_ids'+val).remove();
+                        })
+                    }
+                })
             })
+
         })
     });
 </script>
